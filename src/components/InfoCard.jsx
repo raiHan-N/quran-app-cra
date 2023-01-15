@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import checkMode from "../utils/checkDarkMode";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const InfoCard = () => {
   const mode = checkMode();
-
-  const navigate = useNavigate();
 
   const [ayahs, setAyahs] = useState();
   const [surah, setSurah] = useState([]);
@@ -64,16 +61,14 @@ const InfoCard = () => {
           Ayat : {ayat ? ayat?.number?.inSurah : "Belum ada"}
         </p>
       </div>
-      <button
+      <a
+        href={noSurah ? `/surah/${noSurah}?type=last` : ""}
         className={`${
           mode === "light" ? "bg-primary" : "bg-[#356379]"
         } text-light flex justify-center items-center font-normal text-[16px] md:text-[28px] leading-9 rounded-[20px] px-5 py-3`}
-        onClick={() => {
-          navigate(noSurah ? `/surah/${noSurah}` : "");
-        }}
       >
         Lihat
-      </button>
+      </a>
     </div>
   );
 };

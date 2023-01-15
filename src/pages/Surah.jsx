@@ -107,6 +107,18 @@ const Surah = () => {
 
   useEffect(() => {
     setLastIndex(null);
+    const getSurah = JSON.parse(localStorage.getItem("surah"));
+    const last = window.location.search.valueOf().length > 0;
+    if (last) {
+      let top = cardRef.current[getSurah.inSurah - 1];
+      if (top) {
+        top = top.offsetTop;
+      }
+      window.scrollTo({
+        top: top - 50,
+        behavior: "smooth",
+      });
+    }
 
     player.reset();
     player.destroy();
@@ -151,6 +163,7 @@ const Surah = () => {
       .get(`https://quran-api-id.vercel.app/surahs/${nomor}`)
       .then((res) => {
         setSurah(res.data);
+
         // <!-- Add tracks to the queue -->
         res.data.ayahs.forEach((ayah, index) => {
           setTracks((prev) => [
@@ -182,15 +195,6 @@ const Surah = () => {
   }, [nomor]);
 
   useEffect(() => {
-    let top = cardRef.current[archive.inSurah - 1];
-    if (top) {
-      top = top.offsetTop;
-    }
-    window.scrollTo({
-      top: top - 50,
-      behavior: "smooth",
-    });
-
     const surahStorage = localStorage.getItem("surah");
     if (!surahStorage && archive.length > -1) {
       localStorage.setItem("surah", JSON.stringify(archive));
@@ -201,11 +205,6 @@ const Surah = () => {
 
   useEffect(() => {
     localStorage.setItem("surah", JSON.stringify(archive));
-    const top = cardRef.current[archive.inSurah - 1]?.offsetTop;
-    window.scrollTo({
-      top: top - 50,
-      behavior: "smooth",
-    });
   }, [archive]);
 
   if (!surah) {
@@ -394,8 +393,8 @@ const Surah = () => {
           </div>
         ))}
       </div>
-      <Link
-        to={"/"}
+      <a
+        href={"/"}
         className={`fixed bottom-5 right-2 ${
           mode === "dark" ? "bg-primary" : "bg-light"
         }  p-4 rounded-full shadow-xl`}
@@ -405,7 +404,7 @@ const Surah = () => {
             mode === "dark" ? "text-primary_dark" : "text-primary"
           }  text-lg`}
         />
-      </Link>
+      </a>
     </main>
   );
 };

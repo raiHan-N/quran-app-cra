@@ -64,7 +64,7 @@ const Home = () => {
   };
 
   const filteredData =
-    likedData.length > 0
+    likedData.length > 0 && inputText === ""
       ? getLikedList()
       : data.filter((e) => {
           if (inputText === "") {
