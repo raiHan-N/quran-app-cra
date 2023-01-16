@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link, useParams } from "react-router-dom";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
 import Archive from "../components/Archive";
@@ -107,18 +107,6 @@ const Surah = () => {
 
   useEffect(() => {
     setLastIndex(null);
-    const getSurah = JSON.parse(localStorage.getItem("surah"));
-    const last = window.location.search.valueOf().length > 0;
-    if (last) {
-      let top = cardRef.current[getSurah.inSurah - 1];
-      if (top) {
-        top = top.offsetTop;
-      }
-      window.scrollTo({
-        top: top - 50,
-        behavior: "smooth",
-      });
-    }
 
     player.reset();
     player.destroy();
@@ -161,11 +149,11 @@ const Surah = () => {
     player.setVolume(volumeCust);
     axios
       .get(`https://quran-api-id.vercel.app/surahs/${nomor}`)
-      .then((res) => {
+      .then(async (res) => {
         setSurah(res.data);
 
         // <!-- Add tracks to the queue -->
-        res.data.ayahs.forEach((ayah, index) => {
+        await res.data.ayahs.forEach((ayah, index) => {
           setTracks((prev) => [
             ...prev,
             {
@@ -193,6 +181,26 @@ const Surah = () => {
         console.error(err);
       });
   }, [nomor]);
+
+  useMemo(() => {
+    setTimeout(() => {
+      const getSurah = JSON.parse(localStorage.getItem("surah"));
+      const last = window.location.search.valueOf().length > 0;
+      if (last || nomor == JSON.parse(localStorage.getItem("param"))) {
+        console.log(cardRef);
+
+        let top = cardRef.current[getSurah.inSurah - 1];
+        console.log(top);
+        if (top) {
+          top = top.offsetTop;
+        }
+        window.scrollTo({
+          top: top - 50,
+          behavior: "smooth",
+        });
+      }
+    }, 1000);
+  }, [cardRef]);
 
   useEffect(() => {
     const surahStorage = localStorage.getItem("surah");
