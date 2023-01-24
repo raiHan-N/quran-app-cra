@@ -1,10 +1,15 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi";
 import Archive from "../components/Archive";
 import checkMode from "../utils/checkDarkMode";
-import { AiFillPlayCircle, AiFillStop, AiFillHome } from "react-icons/ai";
+import {
+  AiFillPlayCircle,
+  AiFillStop,
+  AiFillHome,
+  AiOutlineArrowUp,
+} from "react-icons/ai";
 import player, {
   useTrackPlayerProgress,
   usePlaybackTrackChanged,
@@ -413,6 +418,19 @@ const Surah = () => {
           }  text-lg`}
         />
       </a>
+      <AiOutlineArrowUp
+        className={`flex justify-center items-center border-2 fixed bottom-5 left-2 cursor-pointer w-10 h-10 p-2 rounded-full shadow-xl ${
+          mode === "dark"
+            ? "border-primary text-light"
+            : "border-primary_dark text-dark"
+        } text-5xl`}
+        onClick={() => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        }}
+      />
     </main>
   );
 };
