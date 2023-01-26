@@ -278,7 +278,7 @@ const Surah = () => {
           <div className="w-full flex justify-center items-center gap-5 p-9 text-light">
             {surah.bismillah ? (
               <div className="w-full flex flex-col items-center gap-3">
-                <p className="text-4xl font-arabic">{surah.bismillah.arab} </p>
+                <p className="text-5xl font-arabic">{surah.bismillah.arab} </p>
                 <div className="w-50% flex gap-2 items-center self-start">
                   <input
                     type="range"
@@ -391,7 +391,7 @@ const Surah = () => {
             </div>
 
             <div className="w-full flex justify-end items-center gap-5">
-              <p className="text-3xl font-arabic">{item.arab}</p>
+              <p className="text-4xl font-arabic">{item.arab}</p>
               <h3
                 className={`px-3 py-1 ${
                   mode === "dark" ? "bg-primary_dark" : "bg-primary"

@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        arabic: ["Noto Naskh Arabic", "serif"],
+        arabic: ["Mirza", "serif"],
       },
       colors: {
         light: "#F6F6F6",
