@@ -391,7 +391,7 @@ const Surah = () => {
             </div>
 
             <div className="w-full flex justify-end items-center gap-5">
-              <p className="text-4xl font-arabic">{item.arab}</p>
+              <p className="text-4xl font-arabic text-right">{item.arab}</p>
               <h3
                 className={`px-3 py-1 ${
                   mode === "dark" ? "bg-primary_dark" : "bg-primary"
