@@ -7,7 +7,7 @@ export default function Archive({ no, handleArchive, archive, ayahs, nomor }) {
 
   return (
     <>
-      {ayahs.includes(archive.inQuran) && archive.inSurah == nomor ? (
+      {ayahs.includes(archive?.inQuran) && archive.inSurah === nomor ? (
         <AiFillBook
           className={`${
             mode === "dark" ? "text-primary_dark" : "text-primary"
