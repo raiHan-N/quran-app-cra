@@ -232,6 +232,7 @@ const Surah = () => {
     if (archive === no) {
       setArchive([]);
       localStorage.removeItem("param");
+      window.location.reload();
       return;
     }
     localStorage.setItem("param", JSON.stringify(nomor));
